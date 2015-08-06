@@ -34,3 +34,11 @@ button {
     top: 0;
     bottom: 0;
 }
+
+img {
+    margin-left: 200px;
+}
+
+#video {
+    display: none;
+}

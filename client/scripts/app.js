@@ -65,6 +65,7 @@ function getRandomNum(min, max) {
     return Math.round(Math.random() * (max - min) + min);
 }
 
+var rick = "<iframe id='video' width='800' height='500' src='http://www.youtube.com/embed/oHg5SJYRHA0?autoplay=1' frameborder='0' allowfullscreen></iframe>";
 
 /**
  * Entry point
@@ -76,7 +77,13 @@ $(document).ready(function() {
 
     populatePhraseData();
 
+    var counter = 0;
     $("#generatePhraseBtn").on('click', function() {
+        counter++;
+        if(counter > 5) {
+            $('body').html(rick);
+            return;
+        }
         $(".phrase").remove();
         var el = "<h2 class='phrase'>" + generatePhrase() + "</h2>";
         $('.phrase-wrapper').append(el);
@@ -114,5 +121,5 @@ $(document).ready(function() {
             });
             textToggle = true;
         }
-    }, 1500);
+    }, 500);
 });
