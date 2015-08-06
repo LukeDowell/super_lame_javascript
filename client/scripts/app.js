@@ -65,15 +65,54 @@ function getRandomNum(min, max) {
     return Math.round(Math.random() * (max - min) + min);
 }
 
+
 /**
  * Entry point
  */
 $(document).ready(function() {
+    var audioEl = document.createElement('audio');
+    audioEl.setAttribute('src', '../assets/audio/woooop.mp3');
+    audioEl.setAttribute('autoplay', 'autoplay');
+
     populatePhraseData();
 
     $("#generatePhraseBtn").on('click', function() {
         $(".phrase").remove();
         var el = "<h2 class='phrase'>" + generatePhrase() + "</h2>";
         $('.phrase-wrapper').append(el);
+        audioEl.play();
+
+        $(this).animate({
+            left: getRandomNum(0, window.innerWidth),
+            right: getRandomNum(0, window.innerWidth),
+            top: getRandomNum(0, window.innerHeight),
+            bottom: getRandomNum(0, window.innerHeight)
+        });
     });
+
+    var toggled = false;
+    setInterval(function() {
+        if(toggled) {
+            $("#generatePhraseBtn").css("background-color", "yellow");
+            toggled = false;
+        } else {
+            $("#generatePhraseBtn").css("background-color", "green");
+            toggled = true;
+        }
+    }, 1000)
+
+    var textToggle = false;
+    setInterval(function() {
+        if(textToggle) {
+            $("h1, h2").animate({
+                'font-size': '50px'
+            });
+            textToggle = false;
+        } else {
+            $("h1, h2").animate({
+                'font-size': '20px'
+            });
+            textToggle = true;
+        }
+    }, 1500);
 });
